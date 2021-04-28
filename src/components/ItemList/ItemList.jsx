@@ -54,7 +54,7 @@ const ItemList = () => {
                                         src={item.image} 
                                         alt={item.title} 
                                         height='200'
-                                        className='card-image-top'
+                                        className='card-image-top m-2'
                                         style={
                                             {
                                                 objectFit:'contain'

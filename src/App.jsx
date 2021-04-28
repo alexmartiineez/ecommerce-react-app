@@ -7,6 +7,7 @@ import {
 import Navbar from './components/Navbar/Navbar';
 import Home from './screens/Home/Home';
 import ItemDetail from './screens/ItemDetail/ItemDetail';
+import CartContainer from './screens/CartContainer/CartContainer';
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
           <ItemDetail/>
 
         </Route>
+
+        <Route path='/cart' component={CartContainer} />
 
       </Switch>
 
