@@ -1,0 +1,27 @@
+.plus {
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.1s ease-in;
+}
+
+.plus:hover {
+    color: red;
+}
+
+.counter_input {
+    border: none;
+    outline: none;
+    width: 5rem;
+    text-align: center;
+    background-color: #e7e5e5a2;
+}
+
+.counter_item {
+    max-width: 15rem;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
