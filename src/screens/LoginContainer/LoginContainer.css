@@ -1,0 +1,56 @@
+.loginContainer {
+    background: linear-gradient(90deg, rgba(36,0,0,1) 0%, rgba(82,38,36,1) 13%, rgba(131,132,52,1) 45%, rgba(214,137,11,1) 100%, rgba(0,212,255,1) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.cardLogin {
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+input[type='email'],
+input[type='password'] {
+    margin: 13px 0;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 10px 10px;
+    width: 80%;
+    outline: none;
+    color: black;
+    border-radius: 24px;
+    transition: 0.25s
+}
+
+input[type='email']:focus,
+input[type='password']:focus {
+    width: 90%;
+    border-color: #2ecc71;
+}
+
+input[type="submit"] {
+    background: none;
+    display: block;
+    margin: 20px;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline: none;
+    color: black;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer
+}
+
+input[type="submit"]:hover {
+    background: #2ecc71
+}
