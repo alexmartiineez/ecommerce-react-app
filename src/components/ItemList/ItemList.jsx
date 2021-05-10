@@ -46,7 +46,7 @@ const ItemList = () => {
                 {
                     products.map(item => (
                         
-                        <div className='col'>
+                        <div className='col' key={item.id}>
 
                                 <Link to={`/product/${item.id}`} key={item.id} className='text-dark text-decoration-none'>
                                 <div className="card">

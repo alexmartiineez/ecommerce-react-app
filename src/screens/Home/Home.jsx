@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Carousel from '../../components/Carousel/Carousel'
 import ItemList from '../../components/ItemList/ItemList'
 
-const Home = () => {
+const Home = (props) => {
+
+    useEffect(() => {
+        props.setActualLocation(window.location.pathname)
+    }, [props])
+
     return (
         <div>
             
