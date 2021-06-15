@@ -7,10 +7,16 @@ const PlaceOrder = () => {
 
     const [order, setOrder] = useState('')
 
-    const {id} = useParams // history.location.pathname.split('/')[2]
+    const {id} = useParams() // history.location.pathname.split('/')[2]
     const {user} = useContext(UserContext)
 
+    console.log('este es el Id', id)
+
     useEffect(() => {
+
+       /*  const getMP = (products) => {
+            return
+        } */
 
         const getOrder = async() => {
             try {
@@ -23,11 +29,13 @@ const PlaceOrder = () => {
                     .doc(id)
                     .get()
 
+                    console.log('dborder', dbOrder.data())
+
                     setOrder({
                         id: dbOrder.id,
                         ...dbOrder.data()
                     }
-                    ) //NOS QUEDAMOS AQUI
+                    )
                 }
 
             } catch(error) {
@@ -39,7 +47,7 @@ const PlaceOrder = () => {
 
     }, [id, user.active, user.email])
 
-    console.log(order)
+    console.log('hola', order)
 
     return (
         <div className='container mt-3 container-placeorder'>
@@ -52,10 +60,16 @@ const PlaceOrder = () => {
                         </h5>
                         <div>
                             <p className='mb-1 fw-bold'>
-                                Nombre: <span className='fw-normal'>nombre de orden</span>
+                                Nombre: 
+                                <span className='fw-normal ms-1'>
+                                    {order.name}
+                                </span>
                             </p>
-                            <p>
-                                Domicilio: <span className='fw-normal'>argentina</span>
+                            <p className='mb-1 fw-bold'>
+                                Domicilio: 
+                                <span className='fw-normal ms-1'>
+                                    {order.direction}
+                                </span>
                             </p>
                         </div>
                     </div>
@@ -64,16 +78,16 @@ const PlaceOrder = () => {
                         <h5 className='card-title text-capitalize mb-3'>
                             Medio de pago
                         </h5>
-                        <p className='mb-1 fw-bold'>
+                        <p className='mb-1'>
                             Metodo: 
-                            <span className='fw-bold text-uppercase'>
+                            <span className='text-uppercase ms-1'>
                                 Mercado Pago
                             </span>
                         </p>
                         <p className='mb-1 fw-bold'>
                             Estado:
-                            <span className='fw-bold text-uppercase'>
-                                Not paid
+                            <span className='fw-bold text-uppercase ms-1'>
+                                {order.status}
                             </span>
                         </p>
                     </div>
@@ -83,8 +97,17 @@ const PlaceOrder = () => {
                             Detalles de la orden
                         </h5>
                         <div>
-                            {
-                                //ACA IR EL CARRITO
+                            { 
+                                order?.cart?.map((item, index) => (
+                                    <div 
+                                        className='d-flex justify-content-between align-items-center flex-wrap mt-1'
+                                        key={index}>
+                                            <img src={item.image} alt={item.title} height={50} />
+                                            <span>{item.name}</span>
+                                            <span>{item.title}</span>
+                                            <span>Cantidad: {item.qty}</span>
+                                    </div>
+                                ))
                             }
                         </div>
                     </div>
@@ -95,18 +118,40 @@ const PlaceOrder = () => {
                 <div className='col-md-4'>
                     <div className='card mt-3 bg-light p-3'>
                         <div className='d-flex justify-content-between'>
-                            <span className='fw-bold'>Subtotal</span>
-                            <span>$ 40000</span>
+                            <span className='fw-bold ms-1'>Subtotal</span>
+                            <span>$ {order.totalPrice}</span>
                         </div>
                         <div className='d-flex justify-content-between'>
-                            <span className='fw-bold'>Descuento</span>
-                            <span>$ 3000</span>
+                            <span className='fw-bold ms-1'>Descuento</span>
+                            <span>
+                                {
+                                    order.totalPrice > 10000 ?
+                                        `$ ${parseInt(order.totalPrice * 0.05)}`
+                                    :
+                                    `No se aplican descuentos`
+                                }
+                            </span>
                         </div>
                         <hr/>
                         <div className='d-flex justify-content-between'>
-                            <span className='fw-bold'>Total</span>
-                            <span>$ 37000</span>
+                            <span className='fw-bold ms-1'>Total</span>
+                            <span>
+                                {
+                                    order.totalPrice > 2000 ?
+                                        `$ ${order.totalPrice - parseInt(order.totalPrice * 0.05)}` 
+                                    :
+                                    `$ ${order.totalPrice}`
+                                }
+                            </span>
                         </div>
+                        {
+                            order.status === 'Not Paid' &&
+                            (
+                                <div className="">
+                                    <a className='btn btn-info w-100 mt-4'>Pagar con Mercado Pago</a>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
 
