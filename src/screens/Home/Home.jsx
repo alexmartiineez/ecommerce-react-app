@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Carousel from '../../components/Carousel/Carousel'
 import ItemList from '../../components/ItemList/ItemList'
+import UserContext from '../../context/UserContext'
 
 const Home = (props) => {
+
+    const { user } = useContext(UserContext)
 
     useEffect(() => {
         props.setActualLocation(window.location.pathname)
@@ -15,6 +18,11 @@ const Home = (props) => {
             <Carousel/>
 
             <div className='container '>
+
+                {
+                    user.active && <h6 className='mt-4 text-muted'>Hola {user.name}</h6>
+                }
+
                 <h2 className='text-center text-muted display-6 mt-4 mb-3'>¿Que estas buscando?</h2>
 
                 {/* Lista de productos */}

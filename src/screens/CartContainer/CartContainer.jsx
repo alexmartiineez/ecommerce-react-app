@@ -1,9 +1,15 @@
 import React, { useContext } from 'react'
+import { useHistory } from 'react-router'
 import { TiendaContext } from '../../context/TiendaProvider'
 
 const CartContainer = () => {
 
     const {cart, removeItem} = useContext(TiendaContext)
+    const history = useHistory()
+
+    const checkoutHandler = () => {
+        history.push('/login?redirect=shipping')
+    }
 
     const truncate = (string, n) => {
         return string.length > n ? string.substr(0, n-1) + '...': string
@@ -55,7 +61,7 @@ const CartContainer = () => {
                         <button 
                             className="btn btn-success mx-0 mt-3 w-100" 
                             disabled={cart.length === 0}
-                            >Realizar Compra</button>
+                            onClick={checkoutHandler}>Realizar Compra</button>
 
                     </div>
 

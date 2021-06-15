@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import UserContext from '../../context/UserContext'
 
 const Navbar = () => {
+
+    const { signOut, user } = useContext(UserContext)
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
@@ -13,7 +17,24 @@ const Navbar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item"><Link to='/login' className="nav-link active" aria-current="page">Login</Link></li>
+                        <li className="nav-item">
+                            
+                            {
+                                user.active ? (
+                                    <span 
+                                        className='nav-link'
+                                        aria-current='page'
+                                        onClick={signOut} 
+                                        style={{cursor:'pointer'}}>
+                                        Salir
+                                    </span>
+                                ) : 
+                                (
+                                    <Link to='/login' className="nav-link active" aria-current="page">Login</Link>
+                                )
+                            }
+
+                        </li>
                         <li className="nav-item"><a className="nav-link" href="/">Link</a></li>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
